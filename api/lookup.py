@@ -4,13 +4,14 @@ from http.server import BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
 
 PRANK_DB = {
-    "onf1ow": {"phone": "+927825595", "first_name": "Усмонов", "last_name": "Ибодулло"},
-    "azizhxn": {"phone": "+926100574", "first_name": "Азизхон", "last_name": "Фаттидинов"},
-    "rembx_7": {"phone": "+928305666", "first_name": "Мухаммадхуча", "last_name": "Рустамов"},
-    "mansur_4800": {"phone": "+935754521", "first_name": "Мансур", "last_name": "Пулотов"},
-    "abdugsw": {"phone": "+782020707", "first_name": "Абдуазиз", "last_name": "Абдуманнонов"},
-    "ssalimovv8": {"phone": "+928470001", "first_name": "Мухаммад", "last_name": "Салимов"},
-    "sholk1313": {"phone": "+501009560", "first_name": "Муртазо", "last_name": "Байзоев"}
+    "onf1ow": {"phone": "+992927825595", "first_name": "Усмонов", "last_name": "Ибодулло"},
+    "azizhxn": {"phone": "+992926100574", "first_name": "Азизхон", "last_name": "Фаттидинов"},
+    "rembx_7": {"phone": "+992928305666", "first_name": "Мухаммадхуча", "last_name": "Рустамов"},
+    "mansur_4800": {"phone": "+992935754521", "first_name": "Мансур", "last_name": "Пулотов"},
+    "abdugsw": {"phone": "+992782020707", "first_name": "Абдуазиз", "last_name": "Абдуманнонов"},
+    "ssalimovv8": {"phone": "+992928470001", "first_name": "Мухаммад", "last_name": "Салимов"},
+    "sholk1313": {"phone": "+992501009560", "first_name": "Муртазо", "last_name": "Байзоев"},
+    "raupov_p": {"phone": "+992927706432", "first_name": "Парвиз", "last_name": "Раупов"}
 }
 
 class handler(BaseHTTPRequestHandler):
