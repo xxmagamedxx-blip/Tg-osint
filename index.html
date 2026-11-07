@@ -1,0 +1,58 @@
+<!-- file: index.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TG-OSINT PROBE</title>
+    <style>
+        body { background: #0d1117; color: #c9d1d9; font-family: 'Courier New', monospace; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .container { width: 420px; background: #161b22; padding: 2.5rem; border-radius: 8px; border: 1px solid #30363d; box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+        h2 { color: #58a6ff; margin-top: 0; text-align: center; letter-spacing: 2px; }
+        input, button { width: 100%; padding: 12px; margin-top: 12px; box-sizing: border-box; border-radius: 4px; border: 1px solid #30363d; background: #0d1117; color: #c9d1d9; font-family: inherit; font-size: 1rem; }
+        button { background: #238636; color: white; border: none; cursor: pointer; font-weight: bold; letter-spacing: 1px; transition: background 0.2s; }
+        button:hover { background: #2ea043; }
+        .result { margin-top: 20px; padding: 15px; background: #0d1117; border: 1px solid #30363d; border-radius: 4px; display: none; line-height: 1.6; }
+        .error { color: #f85149; border-color: #f8514933; }
+        .success { color: #3fb950; border-color: #3fb95033; }
+        label { font-size: 0.85rem; color: #8b949e; text-transform: uppercase; letter-spacing: 1px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>TG-OSINT PROBE</h2>
+        <label for="username">Target Username:</label>
+        <input type="text" id="username" placeholder="@username" autocomplete="off">
+        <button onclick="probe()">EXECUTE LOOKUP</button>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        async function probe() {
+            const input = document.getElementById('username').value.trim();
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            resultDiv.innerHTML = 'Scanning database...';
+
+            try {
+                const response = await fetch(`/api/lookup?username=${encodeURIComponent(input)}`);
+                const data = await response.json();
+                
+                if (data.error) throw new Error(data.error);
+
+                resultDiv.className = 'result success';
+                resultDiv.innerHTML = `
+                    <strong>MATCH FOUND</strong><br>
+                    User: @${data.username}<br>
+                    Phone: ${data.phone}<br>
+                    Name: ${data.first_name} ${data.last_name}
+                `;
+            } catch (e) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `<strong>ERROR:</strong> ${e.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
